@@ -125,6 +125,70 @@ public class ThreePrisonersDilemma {
 				return oppHistory2[n-1];
 		}	
 	}
+	
+	/* End of Baseline Strategies */
+	
+	/* Experimental Strategies */
+	
+	class NiceT4TPlayer extends Player {
+		// If both opponent makes the same move, copy the move
+		// Else, cooperate
+		int selectAction(int n, int[] myHistory, int[] oppHistory1, int[] oppHistory2) {
+			if (n == 0) {
+				return 0; // cooperate by default
+			}
+			if (oppHistory1[n-1] == oppHistory2[n-1]) {
+				return oppHistory1[n-1]; 
+			} else {
+				return 0;
+			}
+		}
+	}
+	
+	class Pavlov extends Player {
+		int selectAction(int n, int[] myHistory, int[] oppHistory1, int[] oppHistory2) {
+			if (n==0) {
+				return 0;			
+			}
+			if (oppHistory1[n - 1] != oppHistory2[n - 1]) {
+				return 1;
+			}
+			return 0;
+		}
+	}
+	
+	class GrimTrigger extends Player {
+		int selectAction(int n, int[] myHistory, int[] oppHistory1, int[] oppHistory2) {
+			if (n == 0) {
+				return 0;
+			}
+			if (oppHistory1[n - 1] == 1 || oppHistory2[n - 1] == 1) {
+				return 1;
+			}
+			return 0;
+		}
+	}
+	
+	class AggressiveT4T extends Player {
+		// If both opponent makes the same move, copy the move
+		// Else, cooperate
+		int selectAction(int n, int[] myHistory, int[] oppHistory1, int[] oppHistory2) {
+			if (n == 0) {
+				return 0; // cooperate by default
+			}
+			if (oppHistory1[n-1] == oppHistory2[n-1]) {
+				if (oppHistory1[n-1] == 1) {
+					return 0;
+				} else {
+					return 1;
+				}
+			} else {
+				return 0;
+			}
+		}
+	}
+	
+	/* End of Experimental Strategies */
 
 	
 	/* In our tournament, each pair of strategies will play one match against each other. 
@@ -162,7 +226,7 @@ public class ThreePrisonersDilemma {
 	 (strategies) in between matches. When you add your own strategy,
 	 you will need to add a new entry to makePlayer, and change numPlayers.*/
 	
-	int numPlayers = 6;
+	int numPlayers = 10; // Total number of players, adjust accordingly to no. of strategies
 	Player makePlayer(int which) {
 		switch (which) {
 		case 0: return new NicePlayer();
@@ -171,6 +235,10 @@ public class ThreePrisonersDilemma {
 		case 3: return new TolerantPlayer();
 		case 4: return new FreakyPlayer();
 		case 5: return new T4TPlayer();
+		case 6: return new NiceT4TPlayer();
+		case 7: return new Pavlov();
+		case 8: return new GrimTrigger();
+		case 9: return new AggressiveT4T();
 		}
 		throw new RuntimeException("Bad argument passed to makePlayer");
 	}
