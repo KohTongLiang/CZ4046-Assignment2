@@ -130,7 +130,7 @@ public class ThreePrisonersDilemma {
 
 	/* End of Baseline Strategies */
 
-	/* Custom Strategies */
+	/* PROPOSED STRATEGY */
 	class TL_Strategy extends Player {
 		// Calculate percentage of cooperation by a certain player
 		float calculateCoopPercentage(int[] history) {
@@ -162,7 +162,9 @@ public class ThreePrisonersDilemma {
 			return 1;
 		}
 	}
+	/* End of PROPOSED STRATEGY */
 	
+	/* Experimented Strategies */
 	class T4T2 extends Player {
 		// If both opponent makes the same move, copy the move
 		// Else, cooperate
@@ -202,7 +204,7 @@ public class ThreePrisonersDilemma {
 		}
 	}
 
-	/* End of Custom Strategies */
+	/* End of Experimented Strategies */
 
 	/*
 	 * In our tournament, each pair of strategies will play one match against each
